@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import ContactSection from "./components/ContactSection";
+import GraphSection from "./components/GraphSection";
+import Header from "./components/Header";
+import Sidebar from "./components/Sidebar";
+import { getInitialContactScreen } from "./store/ContactSlice";
 
-function App() {
+const App = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getInitialContactScreen());
+  }, [dispatch]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div className="h-[91vh]">
+        <Header />
+        <div className="grid grid-flow-row sm:grid-cols-[1fr_4fr] h-[100%]">
+          <Sidebar />
+          <Routes>
+            <Route path="/contacts" element={<ContactSection />} />
+            <Route path="/graphs" element={<GraphSection />} />
+          </Routes>
+        </div>
+      </div>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
