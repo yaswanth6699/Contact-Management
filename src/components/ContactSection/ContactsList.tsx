@@ -2,6 +2,7 @@ import { IoIosContact } from "react-icons/io";
 import { BUTTON_STYLE_CLASSNAME } from "../../contants";
 import { useGetContacts } from "../../hooks/useGetContacts";
 import { ContactType } from "../../types";
+import { customEllipses } from "../../utils";
 
 const ContactsList = () => {
   const {
@@ -15,19 +16,19 @@ const ContactsList = () => {
       <button className={BUTTON_STYLE_CLASSNAME} onClick={updateScreenToCreate}>
         Create Contact
       </button>
-      <div className="grid grid-flow-row md:grid-cols-5 sm:grid-cols-2 grid-cols-1 gap-4 overflow-auto">
+      <div className="grid grid-flow-row md:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-4 overflow-auto">
         {contacts.map((d: ContactType) => (
           <div className="flex flex-col" key={d.uuid}>
             <div
               key={d.uuid}
-              className="flex flex-col gap-1 border-2 p-4 items-center rounded-lg"
+              className="flex flex-col gap-1 border-2 p-5 items-center rounded-lg"
             >
               <IoIosContact fontSize={42} />
               <p>
-                First Name: <b>{d.firstName}</b>
+                First Name: <b>{customEllipses(d.firstName)}</b>
               </p>
               <p>
-                Last Name: <b>{d.lastName}</b>
+                Last Name: <b>{customEllipses(d.lastName)}</b>
               </p>
               <p>
                 Status: <b>{d.status}</b>
