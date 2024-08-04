@@ -56,11 +56,12 @@ const GraphSection = () => {
         <ResponsiveContainer width="100%" height={500} className={"my-3"}>
           <LineChart width={430} height={250} data={transformedData}>
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="date" fontSize={14} />
+            <XAxis dataKey="date" fontSize={12} />
             <YAxis
               dataKey={"cases"}
               tickFormatter={(val) => convertToMillion(val)}
-              tickCount={20}
+              tickCount={15}
+              fontSize={12}
             />
             <Tooltip />
             <Line type="monotone" dataKey="cases" stroke="#8884d8" />
@@ -70,7 +71,7 @@ const GraphSection = () => {
       <h2 className={TITLE_STYLE_CLASSNAME}>
         Country Wide and World Wide Covid Stats
       </h2>
-      <div className="grid sm:grid-flow-row sm:grid-cols-[5fr_1.5fr] gap-2 h-[500px]">
+      <div className="grid sm:grid-rows-1 grid-rows-2 sm:grid-cols-[5fr_1.5fr] gap-2 h-full sm:h-[500px]">
         <MapContainer center={[20, 0]} zoom={2} scrollWheelZoom={true}>
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -98,9 +99,9 @@ const GraphSection = () => {
             </Marker>
           ))}
         </MapContainer>
-        <div className="h-[100%] border-2 p-2 grid sm:grid-col-1 grid-col-2 grid-flow-row overflow-auto">
+        <div className="h-[100%] border-2 p-2 grid sm:grid-cols-1 grid-cols-2 gap-2 grid-flow-row overflow-auto">
           {Object.keys(worldWideCovidData ?? {})?.map((key) => (
-            <p className="text-sm" key={key}>
+            <p className="text-xs sm:text-sm" key={key}>
               {key}:{" "}
               <span className="font-black">
                 {convertToMillion(
